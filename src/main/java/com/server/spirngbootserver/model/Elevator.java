@@ -1,36 +1,32 @@
 package com.server.spirngbootserver.model;
 
+import com.server.spirngbootserver.enums.Direction;
+import com.server.spirngbootserver.enums.NoTargetFloor;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
-@Entity
 @Data
 public class Elevator {
 
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int elevatorId;
-
-    @Column
     private int currentFloor;
-    @Column
     private int nearestTargetFloor;
-    @Column
-    private int direction; // 1 = up, -1 = down, 0 = standing
+    private Direction direction;
     private List<Integer> requestedAndSelectedFloorList;
+    private boolean ifReachedTargetFloor;
 
     public Elevator(int elevatorId) {
         this.elevatorId = elevatorId;
         this.currentFloor = 1;
-        this.nearestTargetFloor = 0; // no target floor
-        this.direction = 0; // elevator is standing
+        this.nearestTargetFloor = NoTargetFloor.NO_TARGET_FLOOR.AsInt;
+        this.direction = Direction.STANDING;
+        this.ifReachedTargetFloor = false;
         requestedAndSelectedFloorList = new ArrayList<>();
     }
+
+
 
     public void removeNearest() {
         requestedAndSelectedFloorList.remove(0);
