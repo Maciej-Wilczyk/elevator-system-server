@@ -1,6 +1,5 @@
 package com.server.spirngbootserver.services;
 
-import com.server.spirngbootserver.command_.Command_;
 import com.server.spirngbootserver.data.DataManager;
 import com.server.spirngbootserver.enums.Direction;
 import com.server.spirngbootserver.model.Elevator;
@@ -31,24 +30,12 @@ public class ElevatorSystemServiceImpl implements ElevatorSystemService {
         return statusList;
     }
 
-    @Override
-    public void step(List<Command_> commandsList) {
-        for (Command_ i : commandsList) {
-            //    pickupOrSelect(i.getElevatorId(), i.getRequestedOrSelectedFloor(), i.getDirection());
-        }
-        updateAllElevators();
-    }
 
     @Override
     public void step() {
         updateAllElevators();
     }
 
-    @Override
-    public void step(Command_ command_) {
-        //   pickupOrSelect(command_.getElevatorId(), command_.getRequestedOrSelectedFloor(), command_.getDirection());
-        updateAllElevators();
-    }
 
     @Override
     public void update(int elevatorId) {
@@ -65,8 +52,6 @@ public class ElevatorSystemServiceImpl implements ElevatorSystemService {
         } else{
             elevator.setIfReachedTargetFloor(false);
         }
-
-
 
         if (ifElevatorHasNotTargetFloor(elevator.getNearestTargetFloor())) {
             elevator.setDirection(Direction.STANDING);
@@ -150,7 +135,7 @@ public class ElevatorSystemServiceImpl implements ElevatorSystemService {
 //    }
 
     @Override
-    public boolean selected(int elevatorId, int selectedFloor) {
+    public boolean select(int elevatorId, int selectedFloor) {
         Direction direction;
         if (selectedFloor - elevatorList.get(elevatorId).getCurrentFloor() > 0) {
             direction = Direction.UP;
