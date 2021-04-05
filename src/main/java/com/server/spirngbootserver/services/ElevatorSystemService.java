@@ -1,12 +1,12 @@
 package com.server.spirngbootserver.services;
 
 import com.server.spirngbootserver.enums.Direction;
-import com.server.spirngbootserver.model.Status;
+import com.server.spirngbootserver.dto.StatusDto;
 
 import java.util.List;
 
 public interface ElevatorSystemService {
-    List<Status> status();
+    List<StatusDto> status();
 
     void  step();
 

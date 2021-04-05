@@ -20,7 +20,7 @@ public class Elevator {
     public Elevator(int elevatorId) {
         this.elevatorId = elevatorId;
         this.currentFloor = 1;
-        this.nearestTargetFloor = NoTargetFloor.NO_TARGET_FLOOR.AsInt;
+        this.nearestTargetFloor = NoTargetFloor.NO_TARGET_FLOOR.noTargetFloorAsInt;
         this.direction = Direction.STANDING;
         this.ifReachedTargetFloor = false;
         requestedAndSelectedFloorList = new ArrayList<>();

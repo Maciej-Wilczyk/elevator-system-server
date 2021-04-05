@@ -1,8 +1,8 @@
 package com.server.spirngbootserver.controller;
 
-import com.server.spirngbootserver.dto.DataForPickup;
-import com.server.spirngbootserver.dto.DataForSelect;
-import com.server.spirngbootserver.model.Status;
+import com.server.spirngbootserver.dto.DataForPickupDto;
+import com.server.spirngbootserver.dto.DataForSelectDto;
+import com.server.spirngbootserver.dto.StatusDto;
 import com.server.spirngbootserver.services.ElevatorSystemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,21 +18,27 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ElevatorSystemController {
 
-    private final ElevatorSystemService elevatorSystemService;
+    final ElevatorSystemService elevatorSystemService;
 
     @GetMapping("/status")
-    public List<Status> status() {
-        return elevatorSystemService.status();
+    public ResponseEntity<List<StatusDto>> status() {
+        return ResponseEntity.ok(elevatorSystemService.status());
     }
 
-    @GetMapping("/step")
-    public void step() {
-        elevatorSystemService.step();
+    @PostMapping("/step")
+    public ResponseEntity<?> step() {
+        try {
+            elevatorSystemService.step();
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            ResponseEntity.BodyBuilder builder = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
+            return builder.build();
+        }
     }
 
     @PostMapping("/pickup")
-    public ResponseEntity<?> pickup(@RequestBody DataForPickup dataForPickup) {
-        boolean isNewFloorAccepted = elevatorSystemService.pickup(dataForPickup.getElevatorId(), dataForPickup.getRequestedFloor(), dataForPickup.getDirection());
+    public ResponseEntity<?> pickup(@RequestBody DataForPickupDto dataForPickupDto) {
+        boolean isNewFloorAccepted = elevatorSystemService.pickup(dataForPickupDto.getElevatorId(), dataForPickupDto.getRequestedFloor(), dataForPickupDto.getDirection());
         if (isNewFloorAccepted) {
             return ResponseEntity.ok(true);
         } else {
@@ -41,8 +47,8 @@ public class ElevatorSystemController {
     }
 
     @PostMapping("/select")
-    public ResponseEntity<?> select(@RequestBody DataForSelect dataForSelect) {
-        boolean isNewFloorAccepted = elevatorSystemService.select(dataForSelect.getElevatorId(), dataForSelect.getSelectedFloor());
+    public ResponseEntity<?> select(@RequestBody DataForSelectDto dataForSelectDto) {
+        boolean isNewFloorAccepted = elevatorSystemService.select(dataForSelectDto.getElevatorId(), dataForSelectDto.getSelectedFloor());
         if (isNewFloorAccepted) {
             return ResponseEntity.ok(true);
         } else {

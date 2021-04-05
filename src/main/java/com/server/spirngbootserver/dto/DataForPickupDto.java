@@ -4,7 +4,7 @@ import com.server.spirngbootserver.enums.Direction;
 import lombok.Data;
 
 @Data
-public class DataForPickup {
+public class DataForPickupDto {
     private int elevatorId;
     private int requestedFloor;
     private Direction direction;
