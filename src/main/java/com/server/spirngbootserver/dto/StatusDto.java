@@ -10,11 +10,13 @@ public class StatusDto {
     private int currentFloor;
     private int nearestTargetFloor;
     private Direction direction;
+    private boolean ifReachedTargetFloor;
 
-    public StatusDto(int elevatorId, int currentFloor, int nearestTargetFloor, Direction direction) {
+    public StatusDto(int elevatorId, int currentFloor, int nearestTargetFloor, Direction direction, boolean ifReachedTargetFloor) {
         this.elevatorId = elevatorId;
         this.currentFloor = currentFloor;
         this.nearestTargetFloor = nearestTargetFloor;
         this.direction = direction;
+        this.ifReachedTargetFloor = ifReachedTargetFloor;
     }
 }

@@ -26,7 +26,7 @@ public class ElevatorSystemServiceImpl implements ElevatorSystemService {
     public List<StatusDto> status() {
         statusDtoList = new ArrayList<>();
         for (Elevator i : elevatorList) {
-            statusDtoList.add(new StatusDto(i.getElevatorId(), i.getCurrentFloor(), i.getNearestTargetFloor(), i.getDirection()));
+            statusDtoList.add(new StatusDto(i.getElevatorId(), i.getCurrentFloor(), i.getNearestTargetFloor(), i.getDirection(), i.isIfReachedTargetFloor()));
         }
         return statusDtoList;
     }
@@ -38,25 +38,16 @@ public class ElevatorSystemServiceImpl implements ElevatorSystemService {
 
     @Override
     public void update(int elevatorId) {
-
-        //boolean flag = false;
         var elevator = elevatorList.get(elevatorId);
+        elevator.setIfReachedTargetFloor(false);
 
-        System.out.println("cur " + elevator.getCurrentFloor() + "target " + elevator.getNearestTargetFloor()
-        + "direction  " + elevator.getDirection() + "list " + elevator.getRequestedAndSelectedFloorList());
         elevator.setCurrentFloor(elevator.getCurrentFloor() + elevator.getDirection().getDirectionAsInt());
-        System.out.println("po");
-        System.out.println("cur " + elevator.getCurrentFloor() + "target " + elevator.getNearestTargetFloor()
-                + "direction  " + elevator.getDirection() + "list " + elevator.getRequestedAndSelectedFloorList());
 
         elevator.setNearestTargetFloor(elevator.getNearestFromList());
 
         if (elevator.getCurrentFloor() == elevator.getNearestTargetFloor()) {
             elevator.removeNearest();
-            //  flag = true; //open elevator
             elevator.setIfReachedTargetFloor(true);
-        } else {
-            elevator.setIfReachedTargetFloor(false);
         }
 
         if (ifElevatorHasNotTargetFloor(elevator.getNearestTargetFloor(), elevator.getNearestFromList())) {
@@ -67,10 +58,6 @@ public class ElevatorSystemServiceImpl implements ElevatorSystemService {
             elevator.setDirection(Direction.DOWN);
         }
 
-        System.out.println("dir po po " + elevator.getDirection());
-
-
-        //return flag;
     }
 
 
@@ -108,16 +95,8 @@ public class ElevatorSystemServiceImpl implements ElevatorSystemService {
         var list = elevatorList.get(elevatorId).getRequestedAndSelectedFloorList();
         int elevatorDirectionAsInt = elevatorList.get(elevatorId).getDirection().getDirectionAsInt();
 
-//        if (requestedOrSelectedFloor == elevatorList.get(elevatorId).getCurrentFloor()) {
-//            return false; // requested or chosen floor is the current floor
-//        }
-
-        //System.out.println(requestedOrSelectedFloor);
-        //System.out.println(list);
-        //System.out.println(list(requestedOrSelectedFloor));
         if(isFloorAlreadyRequestedOrSelected(requestedOrSelectedFloor, list) || isFloorEqualsCurrentFloor(elevatorId, requestedOrSelectedFloor))
             return false;
-
         if (list.isEmpty()) {
             list.add(requestedOrSelectedFloor);
             elevatorList.get(elevatorId).setDirection(direction);
