@@ -19,4 +19,7 @@ public interface ElevatorSystemService {
     boolean addFloorToList(int elevatorId,int requestedOrSelectedFloor , Direction direction);
 
     boolean updateAllElevators();
+
+    void updateElevatorList();
+
 }
