@@ -37,8 +37,8 @@ public class ElevatorSystemController {
     }
 
     @PostMapping("/pickup")
-    public ResponseEntity<?> pickup(@RequestBody DataForPickupDto dataForPickupDto) {
-        boolean isNewFloorAccepted = elevatorSystemService.pickup(dataForPickupDto.getElevatorId(), dataForPickupDto.getRequestedFloor(), dataForPickupDto.getDirection());
+    public ResponseEntity<?> pickup(@RequestBody List<DataForPickupDto> list) {
+        boolean isNewFloorAccepted = elevatorSystemService.pickup(list);
         if (isNewFloorAccepted) {
             return ResponseEntity.ok(true);
         } else {
@@ -47,8 +47,8 @@ public class ElevatorSystemController {
     }
 
     @PostMapping("/select")
-    public ResponseEntity<?> select(@RequestBody DataForSelectDto dataForSelectDto) {
-        boolean isNewFloorAccepted = elevatorSystemService.select(dataForSelectDto.getElevatorId(), dataForSelectDto.getSelectedFloor());
+    public ResponseEntity<?> select(@RequestBody List<DataForSelectDto> list) {
+        boolean isNewFloorAccepted = elevatorSystemService.select(list);
         if (isNewFloorAccepted) {
             return ResponseEntity.ok(true);
         } else {

@@ -1,26 +1,31 @@
 package com.server.spirngbootserver.services;
 
 import com.server.spirngbootserver.dataManager.DataManager;
+import com.server.spirngbootserver.dto.DataForPickupDto;
+import com.server.spirngbootserver.dto.DataForSelectDto;
 import com.server.spirngbootserver.enums.Direction;
 import com.server.spirngbootserver.enums.NoTargetFloor;
 import com.server.spirngbootserver.model.Elevator;
 import com.server.spirngbootserver.dto.StatusDto;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Data
 public class ElevatorSystemServiceImpl implements ElevatorSystemService {
 
-   // private DataManager dataManager;
+
     private List<Elevator> elevatorList;
     private List<StatusDto> statusDtoList;
 
-    final DataManager dataManager;
+    private final DataManager dataManager;
     public ElevatorSystemServiceImpl(DataManager dataManager) {
-        this.dataManager = dataManager;
         elevatorList = dataManager.getElevatorList();
+        this.dataManager = dataManager;
     }
 
     @Override
@@ -46,6 +51,7 @@ public class ElevatorSystemServiceImpl implements ElevatorSystemService {
 
     @Override
     public void update(int elevatorId) {
+        //updateElevatorList();
         var elevator = elevatorList.get(elevatorId);
         elevator.setIfReachedTargetFloor(false);
 
@@ -60,8 +66,6 @@ public class ElevatorSystemServiceImpl implements ElevatorSystemService {
 
         if (ifElevatorHasNotTargetFloor(elevator.getNearestTargetFloor(), elevator.getNearestFromList())) {
             elevator.setDirection(Direction.STANDING);
-           // elevator.setNearestTargetFloor(NoTargetFloor.NO_TARGET_FLOOR.noTargetFloorAsInt);
-
         } else if (elevator.getNearestFromList() - elevator.getCurrentFloor() > 0) {
             elevator.setDirection(Direction.UP);
         } else if (elevator.getNearestFromList() - elevator.getCurrentFloor() < 0) {
@@ -88,21 +92,35 @@ public class ElevatorSystemServiceImpl implements ElevatorSystemService {
 
 
     @Override
-    public boolean select(int elevatorId, int selectedFloor) {
+    public boolean select(List<DataForSelectDto> list) {
         updateElevatorList();
         Direction direction;
-        if (selectedFloor - elevatorList.get(elevatorId).getCurrentFloor() > 0) {
-            direction = Direction.UP;
-        } else {
-            direction = Direction.DOWN;
+        boolean isAnyElevatorChange = false, helper;
+        for(DataForSelectDto i: list){
+            if (i.getSelectedFloor() - elevatorList.get(i.getElevatorId()).getCurrentFloor() > 0) {
+                direction = Direction.UP;
+            } else {
+                direction = Direction.DOWN;
+            }
+            helper = addFloorToList(i.getElevatorId(), i.getSelectedFloor(), direction);
+            if(helper){
+                isAnyElevatorChange = true;
+            }
         }
-        return addFloorToList(elevatorId, selectedFloor, direction);
+        return isAnyElevatorChange;
     }
 
     @Override
-    public boolean pickup(int elevatorId, int requestedFloor, Direction direction) {
+    public boolean pickup(List<DataForPickupDto> list) {
         updateElevatorList();
-        return addFloorToList(elevatorId, requestedFloor, direction);
+        boolean isAnyElevatorChange = false, helper;
+        for(DataForPickupDto i: list){
+            helper = addFloorToList(i.getElevatorId(), i.getRequestedFloor(), i.getDirection());
+            if(helper){
+                isAnyElevatorChange = true;
+            }
+        }
+        return isAnyElevatorChange;
     }
 
     @Override

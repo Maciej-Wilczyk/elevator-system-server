@@ -1,5 +1,7 @@
 package com.server.spirngbootserver.services;
 
+import com.server.spirngbootserver.dto.DataForPickupDto;
+import com.server.spirngbootserver.dto.DataForSelectDto;
 import com.server.spirngbootserver.enums.Direction;
 import com.server.spirngbootserver.dto.StatusDto;
 
@@ -12,9 +14,9 @@ public interface ElevatorSystemService {
 
     void update(int elevatorId);
 
-    boolean pickup(int elevatorId, int requestedFloor, Direction direction);
+    boolean pickup(List<DataForPickupDto> list);
 
-    boolean select(int elevatorId, int requestedFloor);
+    boolean select(List<DataForSelectDto> list);
 
     boolean addFloorToList(int elevatorId,int requestedOrSelectedFloor , Direction direction);
 

@@ -3,17 +3,11 @@ package com.server.spirngbootserver.model;
 import com.server.spirngbootserver.enums.Direction;
 import com.server.spirngbootserver.enums.NoTargetFloor;
 import lombok.Data;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.engine.internal.Cascade;
-
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 public class Elevator {
-
 
     private int elevatorId;
     private int currentFloor;

@@ -28,18 +28,14 @@ public class DataManager {
 
         this.savedDataRepository = savedDataRepository;
         this.elevatorSystemConfigRepository = elevatorSystemConfigRepository;
-//        if(savedDataRepository.count() == 0){
-//            elevatorList = new ArrayList<>();
-//            for (int i = 0; i < elevatorSystemConfigRepository.findById(0).orElseThrow().getNumberOfElevators(); i++) {
-//                elevatorList.add(new Elevator(i));
-//            }
-//        }
+
         if(elevatorSystemConfigRepository.count() == 0){
             ElevatorSystemConfig elevatorSystemConfig = new ElevatorSystemConfig();
             elevatorSystemConfig.setId(0);
             elevatorSystemConfig.setNumberOfElevators(-1);
             elevatorSystemConfig.setNumberOfFloors(-1);
             elevatorSystemConfigRepository.save(elevatorSystemConfig);
+            this.elevatorList = new ArrayList<>();
         }
         else {
             elevatorList = new ArrayList<>();
