@@ -24,12 +24,12 @@ Drugim sposobem będzie
 
 ## Features
 * The main feature of the application is to operate the elevator system which contains:
- * floor selection
- * call for an elevator to a requested floor
- * sorting selected floor (no FCFS, what matters is the direction of travel and whether the selected floor is already on its way)
- * update elevators status
- * make a simulation step
- * return the status of elevators
+  * floor selection
+  * call for an elevator to a requested floor
+  * sorting selected floor (no FCFS, what matters is the direction of travel and whether the selected floor is already on its way)
+  * update elevators status
+  * make a simulation step
+  * return the status of elevators
 * database management
   * set the number of elevators and floors
   * create, update, save and load data
