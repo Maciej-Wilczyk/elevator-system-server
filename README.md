@@ -1,23 +1,36 @@
-# Elevator System - Spring-Boot - Server
-* [Informacje ogólne](#Informacje-ogólne)
-* [Technologie](#Technologie)
-* [Kroki uruchomieniowe](#Kroki-uruchomieniowe)
+## Table of contents
+* [General info](#general-info)
+* [Technologies](#technologies)
+* [Setup](#setup)
+* [Features](#features)
 
-
-## Informacje ogólne
-Aplikacja Elevator System ma na celu zasymulować system kontroli wind w budynku. Powyższy projekt przedstawia warswę serwerową aplikacji. Warstwe klienta znajdziesz tutaj: "link"
+## General info
+The Elevator System app is designed to simulate a building elevator control system. The above project presents the application server layer. You can find the client layer here: "link"
 	
-## Technologie
-Projekt został stworzony z wykorzystaniem:
+## Technologies
+Project is created with:
 * Java 11
 * Spring-Boot
 * SQLite
 * Maven
 
-## Kroki uruchomieniowe
-Do uruchomienia aplikacji potrzebujesz mieć zainstalowaną Java 11 (minimum).
-Najprostszym sposobem włączenia aplikacji przy pomocy Maven'a (musisz mieć go zainstalowanego na swoim komputerze)
-W konsoli przejdź do folderu z projektem i wywołaj komende:
+## Setup
+You need Java 11 (minimum) installed to run the application.
+The easiest way to start the application with Maven (you must have it installed on your computer)
+In the console go to the project folder and run the command:
 mvn spring-boot:run
 
 Drugim sposobem będzie 
+
+## Features
+* The main feature of the application is to operate the elevator system which contains:
+** floor selection
+** call for an elevator to a requested floor
+** sorting selected floor (no FCFS, what matters is the direction of travel and whether the selected floor is already on its way)
+** update elevators status
+** make a simulation step
+** return the status of elevators
+* database management
+** set the number of elevators and floors
+** create, update, save and load data
+* comunication with REST client
