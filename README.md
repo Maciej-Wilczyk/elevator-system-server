@@ -29,7 +29,7 @@ In the console go to the project folder and run the command: <br /> mvn spring-b
   * update elevators status
   * make a simulation step
   * return the status of elevators
-* database management
+* database management:
   * set the number of elevators and floors
   * create, update, save and load data
 * comunication with REST client
