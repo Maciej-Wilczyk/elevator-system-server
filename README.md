@@ -1,7 +1,7 @@
 # Elevator System - Spring-Boot - Server
-* [Informacje ogólne](#Informacje ogólne)
+* [Informacje ogólne](#Informacje-ogólne)
 * [Technologie](#Technologie)
-* [Kroki uruchomieniowe](#Kroki uruchomieniowe)
+* [Kroki uruchomieniowe](#Kroki-uruchomieniowe)
 
 
 ## Informacje ogólne
