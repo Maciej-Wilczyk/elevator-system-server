@@ -6,7 +6,7 @@
 * [Basci overview](#basic-overview)
 
 ## General info
-The Elevator System app is designed to simulate a building elevator control system. The above project presents the application server layer. You can find the client layer here: https://github.com/Maciej-Wilczyk/elevator-system-client
+The Elevator System app is designed to simulate a building elevator control system. The project above presents the application server layer. You can find the client layer here: https://github.com/Maciej-Wilczyk/elevator-system-client
 	
 ## Technologies
 Project is created with:
