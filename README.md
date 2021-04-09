@@ -15,9 +15,9 @@ Project is created with:
 * Maven
 
 ## Setup
-You need Java 11 (minimum) installed to run the application.
+You need Java 11 (minimum) installed to run the application. Clone this repo to your desktop.
 The easiest way to start the application with Maven (you must have it installed on your computer)
-In the console go to the project folder and run the command:  mvn spring-boot:run
+In the console go to the project folder and run the command: mvn spring-boot:run__
 
 Drugim sposobem będzie 
 
