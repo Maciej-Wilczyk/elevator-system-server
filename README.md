@@ -4,7 +4,7 @@
 * [Kroki uruchomieniowe](#Kroki uruchomieniowe)
 
 
-## Informacje Ogólne
+## Informacje ogólne
 Aplikacja Elevator System ma na celu zasymulować system kontroli wind w budynku. Powyższy projekt przedstawia warswę serwerową aplikacji. Warstwe klienta znajdziesz tutaj: "link"
 	
 ## Technologie
