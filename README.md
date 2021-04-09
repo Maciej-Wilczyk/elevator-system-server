@@ -31,6 +31,6 @@ Drugim sposobem będzie
 ** make a simulation step
 ** return the status of elevators
 * database management
-** set the number of elevators and floors
-** create, update, save and load data
+* * set the number of elevators and floors
+* * create, update, save and load data
 * comunication with REST client
