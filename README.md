@@ -18,14 +18,14 @@ Project is created with:
 ## Setup
 You need Java 11 (minimum) installed to run the application. Clone this repo to your desktop or dowland zip.
 The easiest way to start the application with Maven (you must have it installed on your computer)
-In the console go to the project folder and run the command: <br /> mvn spring-boot:run 
+is to open the console in the project directory and run the command:: <br /> mvn spring-boot:run 
 
 
 ## Features
-* The main feature of the application is to operate the elevator system which contains:
+* Operating the elevator system (main feature of the application):
   * floor selection
   * call for an elevator to a requested floor
-  * sorting selected floor (no FCFS, what matters is the direction of travel and whether the selected floor is already on its way)
+  * sorting selected floor (no FCFS, what matters is the direction of travel and whether the elevator moves towards the selected floor or in the opposite direction)
   * update elevators status
   * make a simulation step
   * return the status of elevators
